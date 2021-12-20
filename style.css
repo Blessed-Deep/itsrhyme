@@ -3,7 +3,7 @@
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
-    background-color: #f1f1f1;
+  
   
 }
 
@@ -27,7 +27,7 @@ body {
     overflow: hidden;
     background-color: #f1f1f1;
     padding: 10px 80px;
-    box-shadow: 0px 2px 20px 5px hsla(0, 0%, 0%, 0.2);
+    box-shadow: 0px 1px 10px 5px hsla(0, 0%, 0%, 0.2);
 
 }
 
@@ -51,10 +51,14 @@ body {
     float: right;
 }
 
-.imgSliderView {
+div.imgSliderView {
     height: 200px;
     text-align: center;
-    margin-top: 100px;
+    margin: 70px auto;
+    display: grid;
+    align-items: center;
+    
+    
     
 }
 .lyricsView{
