@@ -34,10 +34,10 @@ body {
     float: left;
     color: black;
     text-align: center;
-    padding: 12px;
+    padding: 10px;
     text-decoration: none;
     font-size: 18px; 
-    line-height: 25px;
+    line-height: 10px;
     border-radius: 4px;
 }
 
@@ -94,8 +94,12 @@ body {
 
 @media screen and (max-width: 650px) {
     .header{
-         padding: 10px 10px;
+         padding: 10px 5px;
          
+    }
+    .header a.logo {
+        font-size: 15px;
+        font-weight: bold;
     }
     .header a {
         /* float: none; */
