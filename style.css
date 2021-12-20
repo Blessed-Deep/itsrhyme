@@ -95,10 +95,8 @@ body {
 @media screen and (max-width: 650px) {
     .header{
          padding: 10px 10px;
-         transition: ease-in-out 1s;
+         
     }
-    
-    
     .header a {
         /* float: none; */
         text-align: left;
@@ -106,6 +104,9 @@ body {
  
     .header-right {
         float: right;
+    }
+    .lyricsView .lyricsContainer{
+        width: 95%;
     }
     
 }
