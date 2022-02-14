@@ -8,53 +8,438 @@
 }
 
 body { 
-    
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .tophead{
+    z-index: 1;
     position: fixed;
     width: 100%;
-    height: 5%;
+    height: 3%;
     top: 0%;
-    background-color: black;
+    font-size: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(26, 22, 43);
+    font-weight: bold;
+    background-color: rgb(26, 22, 43);
 }
 
 .header {
+    z-index: 1;
     top: 3%;
     width: 100%;
+    height: 7%;
+   
     position: fixed;
     overflow: hidden;
+    display: flex;
+    align-items: center;
     background-color: #f1f1f1;
-    padding: 10px 80px;
+    padding-left: 80px;
+    animation: paddingLogo 1s ease;
     box-shadow: 0px 1px 10px 5px hsla(0, 0%, 0%, 0.2);
 
 }
-
-.header a {
-    float: left;
-    color: black;
-    text-align: center;
-    padding: 10px;
+@keyframes paddingLogo {
+    0%{
+        padding-left: 10px;
+    }
+    100%{
+        padding-left: 80px;
+    }
+}
+.header .logo {   
+    color: black;    
     text-decoration: none;
-    font-size: 18px; 
-    line-height: 10px;
-    border-radius: 4px;
-}
-
-.header a.logo {
-    font-size: 25px;
+    font-size: 3vh; 
     font-weight: bold;
+    border-radius: 1vh;
+   
 }
 
-.header-pensearch {
-    float: right;
+
+
+.header-pensearch { 
+    position: fixed;    
+    top: 0%;
+    right: 4%;
+    
+}
+.container{
+    position: relative;
 }
 
-div.imgSliderView {
-    height: 200px;
+
+/* Pen */
+.cls-1,.cls-5{fill:#1a1a1a;}
+.cls-2{fill:#333;}
+.cls-3{fill:#4d4d4d;}
+.cls-4{fill:rgb(90, 90, 90);}
+.cls-header{fill: #f1f1f1;}
+
+
+#SearchingPen{
+    width: 45vh;
+    height: fit-content;
+   
+    
+    
+}
+
+
+.mySearchPen #EditText{
+    width: 19vh;
+    font-size: 2vh;
+    background: none;
+    font-family:sans-serif;
+    visibility: hidden;
+    border: none;
+    outline: none;
+    top: 44%;
+    left: 16%;
+    position: absolute;
+}
+.mySearchPen #RadioBtn{
+    margin-top: 0.6%;
+    margin-left: 0.6%;
+    width: auto;   
+    background: none;
+    color: grey;     
+    font-family:  Haettenschweiler, 'Arial Narrow Bold', sans-serif;        
+    border: none;
+    outline: none;
+    top: 39%;
+    left: 66.2%;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0%;
+    
+}
+#OnOffICO{
+    cursor: pointer;
+}
+
+#RadioBtn.radioOn{
+    visibility: visible;        
+    animation:radioOn 1.5s 2s linear forwards;
+}
+#RadioBtn.radioOff{        
+    animation:radioOff 0.1s linear backwards;
+}
+@keyframes radioOn {
+    0%{        
+           
+        opacity: 0%;
+    }
+    100%{
+         
+        opacity: 100%;
+    }
+}
+@keyframes radioOff {
+    0%{
+        
+        opacity: 100%;
+    }
+    100%{            
+        opacity: 0%;
+        
+    }
+}
+
+
+        *::-webkit-input-placeholder {
+                color: #1a1a1a;
+        }
+        *{
+            -webkit-tap-highlight-color: transparent;
+        }
+        #trigger{
+            cursor: pointer;    
+            
+        }
+        #Go{
+            cursor: pointer;
+        }
+        
+        .cls-1:hover{
+            fill: rgb(34, 34, 34);
+        }
+        
+        
+
+        #trigger.on {
+               animation: on 1s ease forwards;
+              
+        
+        }
+        #trigger.off {
+               animation: off 1s ease forwards;         
+        
+        }
+        @keyframes on {
+            0%{
+                transform: translateX(calc(0px));
+            }
+            25%{
+                transform: translateX(calc(-30px));
+            }
+            100%{
+                transform: translateX(calc(-15px));
+            }
+            
+        }
+        @keyframes off {
+            0%{
+                transform: translateX(calc(-15px));
+            }
+            25%{
+                transform: translateX(calc(-30px));
+            }
+            
+            100%{
+                transform: translateX(calc(0px));
+            }
+            
+        }
+
+       
+        #searchicostick.icostickOn{                
+            animation: icostickOn 1.5s ease-in-out forwards;
+         }
+         #searchicostick.icostickOff{                
+            animation: icostickOff 1.5s 0.5s ease-in-out backwards;
+         }
+         
+        @keyframes icostickOn {
+            0%{            
+                width:89px;
+            }
+            100%{
+                width:50px;                    
+            }
+        }
+        @keyframes icostickOff {
+            0%{
+                width:50px;                    
+            }
+            100%{
+              
+                width:89px;
+            }
+            
+        }
+        
+         #searchICO.searchicoOn{
+             animation: searchicoOn 1.4s 0.5s ease-in-out forwards;               
+         }
+         #searchICO.searchicoOff{
+             animation: searchicoOff 1.4s ease-in-out forwards;        
+         }
+         @keyframes searchicoOn {
+            0%{
+                transform: scale(1,1) translate(0px,0px);
+                opacity: 100%;
+            }
+            100%{
+                /* transform: scale(0.4,0.4) translate(790px,159px); */
+                transform: scale(0.5,0.5) translate(486px,100px);
+                opacity: 40%;
+            }
+        }
+        @keyframes searchicoOff {
+            0%{
+                /* transform: scale(0.4,0.4) translate(790px,159px); */
+                transform: scale(0.5,0.5) translate(486px,100px);
+                opacity: 40%;
+            }
+            100%{
+                transform: scale(1,1) translate(0px,0px);
+                opacity: 100%;
+            }
+            
+        }
+
+        #stick1.s1AniOn{       
+            animation: s1AniOn 0.8s forwards;         
+                           
+        }
+        #stick1.s1AniOff{       
+            animation: s1AniOff 0.8s 0.5s backwards;        
+                           
+        }
+        @keyframes s1AniOn {
+            0%{
+                x: 582.86px;
+                /* y: 150px; */
+                width:93px;
+                opacity: 100%;
+            }
+            100%{
+                x: 630px;
+                width:0px;
+                opacity: 0%;                   
+            }
+        }
+        @keyframes s1AniOff {
+            0%{
+                x: 630px;                   
+                width:0px;
+                opacity: 0%;                  
+            }
+            100%{
+                x: 582.86px;                   
+                width:93px;
+                opacity: 100%;
+            }
+        }
+
+        #stick2.s2AniOn{                
+            animation: s2AniOn 1s 0.5s forwards;          
+        }
+        #stick2.s2AniOff{                
+            animation: s2AniOff 1s forwards;          
+        }
+        @keyframes s2AniOn {
+            0%{
+                x: 593.82px;
+                y: 135.15px;
+                width:74.54px;
+                height:12.57px;
+                rx: 6.28px;
+                opacity: 100%;
+            }
+            100%{
+                x: 591.5px;
+                y: 142px;
+                width:28px;
+                height:28px;
+                rx: 34.56px;
+                ry: 34.56px; 
+                opacity: 40%;
+            }
+        }
+        @keyframes s2AniOff {
+            0%{
+                x: 591.5px;
+                y: 142px;
+                width:28px;
+                height:28px;
+                rx: 34.56px;
+                ry: 34.56px; 
+                opacity: 40%;
+            }
+            100%{
+                x: 593.82px;
+                y: 135.15px;
+                width:74.54px;
+                height:12.57px;
+                rx: 6.28px;
+                opacity: 100%;
+            }
+        }
+     
+        label {
+            display: flex;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 0.2em;
+        }
+        
+
+        label input {
+        position: absolute;
+        left: -9999px;
+        
+        }
+        label input:checked + span {
+            background-color: #252525;
+        }
+        label input:checked + span:before {
+            background-color: #0f0f0f;
+            box-shadow: inset 0 0 0 0.4em #0f0f0f;           
+        }
+        label span {
+            display: flex;
+            align-items: center;
+            font-size: 1.5vh;
+            padding: 0em 0.5em 0em 0em;
+            border-radius: 80em;
+            transition: 0.25s ease;
+        
+        }
+        
+        label span:hover {
+            background-color: #525252;
+        }
+        label span:before {
+            display: flex;
+            flex-shrink: 0;
+            content: "";
+            background-color: grey;
+            width: 1.2em;
+            height: 1.18em;
+            border-radius: 50%;
+            margin-right: 0.375em;
+            transition: 0.25s ease;                
+    }
+
+        #searchArea.searchAreaOn{
+            transform-origin: right;
+            animation: searchAreaOn 1s ease forwards;
+        }
+        #searchArea.searchAreaOff{
+            transform-origin: right;
+            animation: searchAreaOff 1s ease forwards;
+        }
+        @keyframes searchAreaOn {
+            0%{
+                transform: scaleX(0.38);
+            }
+            100%{
+                transform: scaleX(1);
+            }
+        }
+        @keyframes searchAreaOff {
+            0%{
+                transform: scaleX(1); 
+            }
+            100%{
+                
+                transform: scaleX(0.38);
+            }
+            
+        }
+
+        #EditText.EditTextOn{
+            opacity: 0%;
+            visibility: visible;
+            animation: editTextAni 8s forwards;
+        }
+        #EditText.EditTextOff{
+            visibility: hidden;
+        }
+        @keyframes editTextAni {
+            0%{
+                opacity: 0%;
+            }
+            100%{
+                opacity: 100%;
+            }
+        }
+
+
+
+/* After Header */
+
+.imgSliderView {
+    height: 180px;
     text-align: center;
-    margin-block-start: 70px;
+    margin-block-start: 10vh;
     display: grid;
     align-items: center;
     
@@ -97,20 +482,39 @@ div.imgSliderView {
     text-align: center;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
+    .tophead{
+        height: 2%;
+    }
     .header{
-         padding: 10px 5px;
-         
+        top:2%;
+        height: 6%;
+        padding-left: 20px;
+        animation: paddingLogo2 1s ease;    
     }
-    .header a.logo {
-        font-size: 20px;
-        font-weight: bold;
+    #SearchingPen{
+        width: 35vh;
+        height: fit-content;
     }
-    .header a {
-        /* float: none; */
-        text-align: left;
+    label span {
+        font-size: 1.2vh;
     }
- 
+
+    @keyframes paddingLogo2 {
+        0%{
+            padding-left: 80px;
+        }
+        100%{
+            padding-left: 20px;
+        }
+    }
+    .header .logo {
+        font-size: 2vh;
+    }
+    .imgSliderView {
+     margin-top: 8vh;
+    }
+    
     .header-right {
         float: right;
     }
@@ -119,5 +523,3 @@ div.imgSliderView {
     }
     
 }
-
-
