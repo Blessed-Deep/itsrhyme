@@ -489,11 +489,11 @@ body {
 
 @media screen and (max-width: 700px) {
     .tophead{
-        height: 2%;
+        height: 2vh;
     }
     .header{
-        top:2%;
-        height: 6%;
+        top:2vh;
+        height: 6vh;
         padding-left: 20px;
         animation: paddingLogo2 1s ease;    
     }
