@@ -64,11 +64,13 @@ body {
 .header-pensearch { 
     position: fixed;    
     top: 0%;
-    right: 4%;
+    right: 4%;   
+
     
 }
 .container{
     position: relative;
+    
 }
 
 
@@ -82,8 +84,9 @@ body {
 
 #SearchingPen{
     width: 45vh;
-    height: fit-content;
-   
+    display: block;
+    
+    
     
     
 }
@@ -91,6 +94,7 @@ body {
 
 .mySearchPen #EditText{
     width: 19vh;
+
     font-size: 2vh;
     background: none;
     font-family:sans-serif;
@@ -494,7 +498,7 @@ body {
     }
     #SearchingPen{
         width: 35vh;
-        height: fit-content;
+        height: auto;
     }
     label span {
         font-size: 1.2vh;
