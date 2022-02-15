@@ -21,9 +21,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(26, 22, 43);
+    color: #001a33;
+
     font-weight: bold;
-    background-color: rgb(26, 22, 43);
+    background-color: #001a33;
 }
 
 .header {
