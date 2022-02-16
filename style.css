@@ -446,7 +446,6 @@ body {
     text-align: center;
     margin-block-start: 10vh;
     display: grid;
-
     background: linear-gradient(#deebea,#deebea,#deebea, #deebea, #f1f1f1);
     align-items: center;
 }

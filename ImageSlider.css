@@ -20,7 +20,7 @@ h3 {
   width: 100%;
   height: 180px; 
   background: transparent;
-
+  margin-block-end: 16px;
 }
 
 .slider {
@@ -28,12 +28,13 @@ h3 {
   height: 100%;
   width: 100%; 
   overflow: scroll;
+  
 }
 
 .slider-inner {
   position: absolute;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   
   justify-content: space-around;
   padding-left: 10%;
