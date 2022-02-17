@@ -486,7 +486,7 @@ div::-webkit-scrollbar{
     top:7%;
     scrollbar-width: none;
     overflow-y: auto;
-    height: 500px;
+    height: 490px;
   
 }
 
@@ -506,6 +506,12 @@ div::-webkit-scrollbar{
 }
 .gridlistico img{
     height: 20px;
+    margin-left: 1px;
+}
+.gridlistico img:hover{
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #deebea;
 }
 .gridfooter{
     position: absolute;
