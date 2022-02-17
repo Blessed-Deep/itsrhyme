@@ -445,6 +445,7 @@ body {
     height: 180px;
     text-align: center;
     margin-block-start: 10vh;
+    overflow: hidden;
     display: grid;
     background: linear-gradient(#deebea,#deebea,#deebea, #deebea, #f1f1f1);
     align-items: center;
@@ -482,7 +483,7 @@ div::-webkit-scrollbar{
 
 .gridlistcontainer{
     position: absolute;
-    top:6%;
+    top:7%;
     scrollbar-width: none;
     overflow-y: auto;
     height: 500px;
@@ -494,7 +495,7 @@ div::-webkit-scrollbar{
     top: 2%;
     width: 100%;
     padding-left: 30px;
-    padding-right: 50px;
+    padding-right: 30px;
     
 }
 .gridheader h4{
@@ -511,7 +512,7 @@ div::-webkit-scrollbar{
     width: 100%;
     bottom: 2%;
     padding-left: 30px;
-    padding-right: 50px;
+    padding-right: 30px;
 }
 .gridfooter h4{
     float: left;
