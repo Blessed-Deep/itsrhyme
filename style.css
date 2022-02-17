@@ -460,10 +460,11 @@ body {
 }
 .lyricsView .lyricsContainer{
     height: 95%;
-    width: 80%;   
-    overflow-y: scroll;
-    scrollbar-width: none;
+    width: 80%;       
     position: relative;
+    overflow: hidden;
+    
+
     background:  #f1f1f1;
     border-radius: 20px;
     /* box-shadow: -15px -15px 15px rgba(255, 255, 255, 0.2),
@@ -479,16 +480,44 @@ div::-webkit-scrollbar{
 
 /*LyricsView card */
 
-.gridlistcontainer  {
+.gridlistcontainer{
     position: absolute;
-    
+    top:6%;
+    scrollbar-width: none;
+    overflow-y: auto;
+    height: 500px;
   
 }
-  
-.gridlistcontainer h3 {
+
+.gridheader {
+    position: absolute;
+    top: 2%;
+    width: 100%;
     padding-left: 30px;
-    padding-top: 15px;
-    padding-bottom: 10px;
+    padding-right: 50px;
+    
+}
+.gridheader h4{
+    float:left;
+}
+.gridheader .gridlistico{
+    float:right;
+}
+.gridlistico img{
+    height: 20px;
+}
+.gridfooter{
+    position: absolute;
+    width: 100%;
+    bottom: 2%;
+    padding-left: 30px;
+    padding-right: 50px;
+}
+.gridfooter h4{
+    float: left;
+}
+.gridfooter h5{
+    float: right;
 }
   /* Cards */
   .cards {
