@@ -104,24 +104,18 @@
 					<div class="gridheader">
 						<h4>Heading</h4>
 						<div class="gridlistico">
-							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAACpUlEQVR4nO3czWoTURiH8cfPha0LLbi3UJdatIqoS69HcFEF8Q4som79XOiVWAQRL8AKdt/adiF1ocZxMQHLScY2fU/iW3h+MJCTYd6ZM3+STDiHA5IkSZIkSZKkg+9QhRpTwBxwJFDjN7ACbHfsnwVOBeoDbAFfOvZN0/bhcKB+D/hMdx8mYh5YB5oK21fg4pBzvKhUvwGeDam/AGxUqr8OXNjTnRuTV0MuKrK9LurPVq7fAGeLc7ypXP/lCPdvQOQjCvGvkdLpXdo1zBTtcfdhJNFAVJmBJGMgyRhIMgaSjIEkYyDJGEgyBpKMgSRjIMkYSDIGkoyBJGMgyUQD2apyFX9t7tKuYaNoj7sPEzUPrFFv+HPYEO7zSvUb4OmQ+pdoh49r1F8Dzu/pznWoMcnhBHCO2CSH3SYI1JjksAmsduyrMVGjRztR43ughiQdJNHfkGPAInCj/3q/fgHLwAPgR7FvAbgNnAnUh/YH9yHwsXj/OHAHuA4cDdT/CbwFlvqv/4u71J3TdK+oP029SWwN7dPUVHGO+5X7sDjC/RsQ/R9yNXh86VrRnqPu3KwZ2ifCncbdh5FEA6n9T7+sF3kM7VLWHHcfJnew6jOQZAwkGQNJxkCSMZBkDCQZA0nGQJIxkGQMJBkDScZAkjGQZKKB9KpcRXe92vUncY5QvWgg74LHl5aL9grtKF8t68Cn4r1x92EkkTFkgEe0w5ZXiI3PN8CHfr2dtoGbwC3gZKA+wDfgMYPzppZox/QvB+s3wHvgSbCOJEn74opyLVeUG7K5olwFrig3uLmi3IhcUU57ZyDJGEgyBpKMgSRjIMkYSDIGkoyBJGMgyRhIMgaSjIEkYyDJGEgyrijninL/HP50RbnIwX2uKNdyRTlJkiRJkiRJUt8fWlnsaL1K/RoAAAAASUVORK5CYII="/>
-							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAAjUlEQVR4nO3YUQpAQBRAUWT/W2YHInGn5pxvcXtNk96yAMC01hvPHB+8cxhbHVAzgDqgtgfffHqnvHV5J01/AgygDqgVd8BQ/wnTnwADqAMAgIyVWB1QM4A6oGYl9lfFqAygDqhZidUBNQOoAwCAjJVYHVAzgDqgZiX2V8WoDKAOqFmJ1QE1A6gDAIDMCfC/BlWnB/t+AAAAAElFTkSuQmCC"/>
+							<img id="grid" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAACpUlEQVR4nO3czWoTURiH8cfPha0LLbi3UJdatIqoS69HcFEF8Q4som79XOiVWAQRL8AKdt/adiF1ocZxMQHLScY2fU/iW3h+MJCTYd6ZM3+STDiHA5IkSZIkSZKkg+9QhRpTwBxwJFDjN7ACbHfsnwVOBeoDbAFfOvZN0/bhcKB+D/hMdx8mYh5YB5oK21fg4pBzvKhUvwGeDam/AGxUqr8OXNjTnRuTV0MuKrK9LurPVq7fAGeLc7ypXP/lCPdvQOQjCvGvkdLpXdo1zBTtcfdhJNFAVJmBJGMgyRhIMgaSjIEkYyDJGEgyBpKMgSRjIMkYSDIGkoyBJGMgyUQD2apyFX9t7tKuYaNoj7sPEzUPrFFv+HPYEO7zSvUb4OmQ+pdoh49r1F8Dzu/pznWoMcnhBHCO2CSH3SYI1JjksAmsduyrMVGjRztR43ughiQdJNHfkGPAInCj/3q/fgHLwAPgR7FvAbgNnAnUh/YH9yHwsXj/OHAHuA4cDdT/CbwFlvqv/4u71J3TdK+oP029SWwN7dPUVHGO+5X7sDjC/RsQ/R9yNXh86VrRnqPu3KwZ2ifCncbdh5FEA6n9T7+sF3kM7VLWHHcfJnew6jOQZAwkGQNJxkCSMZBkDCQZA0nGQJIxkGQMJBkDScZAkjGQZKKB9KpcRXe92vUncY5QvWgg74LHl5aL9grtKF8t68Cn4r1x92EkkTFkgEe0w5ZXiI3PN8CHfr2dtoGbwC3gZKA+wDfgMYPzppZox/QvB+s3wHvgSbCOJEn74opyLVeUG7K5olwFrig3uLmi3IhcUU57ZyDJGEgyBpKMgSRjIMkYSDIGkoyBJGMgyRhIMgaSjIEkYyDJGEgyrijninL/HP50RbnIwX2uKNdyRTlJkiRJkiRJUt8fWlnsaL1K/RoAAAAASUVORK5CYII="/>
+							<img id="list" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAAjUlEQVR4nO3YUQpAQBRAUWT/W2YHInGn5pxvcXtNk96yAMC01hvPHB+8cxhbHVAzgDqgtgfffHqnvHV5J01/AgygDqgVd8BQ/wnTnwADqAMAgIyVWB1QM4A6oGYl9lfFqAygDqhZidUBNQOoAwCAjJVYHVAzgDqgZiX2V8WoDKAOqFmJ1QE1A6gDAIDMCfC/BlWnB/t+AAAAAElFTkSuQmCC"/>
 							
 						</div>
 					</div>
 					<div class="gridlistcontainer">
 					
-						<div class="cards">
-						  <div class="cards-inner">
+						<div id="cards" class="cards">
+						  <div class="cards-inner">				  
 							<div>
-							  <i class="fab fa-facebook"></i>
-							</div>
-				  
-							<div>
-							  <h4>Facebook</h4>
-							  <small>Social Media</small>
-							  <p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							  <h4>Blessed Deep</h4>
+							    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 								Praesentium, temporibus.
 							  </p>
 							</div>
@@ -129,14 +123,8 @@
 				  
 						  <div class="cards-inner">
 							<div>
-							  <i class="fab fa-twitter"></i>
-							</div>
-				  
-							<div>
-							  <h4>Twitter</h4>
-							  <small>Social Media</small>
-							  <p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							  <h4>Alex Kusum</h4>
+							    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 								Praesentium, temporibus.
 							  </p>
 							</div>
@@ -144,14 +132,8 @@
 				  
 						  <div class="cards-inner">
 							<div>
-							  <i class="fab fa-whatsapp"></i>
-							</div>
-				  
-							<div>
-							  <h4>WhatsApp</h4>
-							  <small>Social Media</small>
-							  <p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							  <h4>Bhawesh Kumar Tandey</h4>
+							    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 								Praesentium, temporibus.
 							  </p>
 							</div>
@@ -159,14 +141,8 @@
 				  
 						  <div class="cards-inner">
 							<div>
-							  <i class="fab fa-instagram"></i>
-							</div>
-				  
-							<div>
-							  <h4>Instagram</h4>
-							  <small>Social Media</small>
-							  <p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							  <h4>Suraj Mahapatra</h4>
+							    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 								Praesentium, temporibus.
 							  </p>
 							</div>
@@ -174,14 +150,8 @@
 				  
 						  <div class="cards-inner">
 							<div>
-							  <i class="fab fa-youtube"></i>
-							</div>
-				  
-							<div>
-							  <h4>YouTube</h4>
-							  <small>Social Media</small>
-							  <p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							  <h4>Rohit Pandit</h4>
+							    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 								Praesentium, temporibus.
 							  </p>
 							</div>
@@ -189,24 +159,41 @@
 				  
 						  <div class="cards-inner">
 							<div>
-							  <i class="fab fa-linkedin"></i>
-							</div>
-				  
-							<div>
-							  <h4>LinkedIn</h4>
-							  <small>Social Media</small>
-							  <p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							  <h4>Sameer Pradhan</h4>
+							  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 								Praesentium, temporibus.
 							  </p>
 							</div>
-						  </div>	                 
+						  </div>
+						  <div class="cards-inner">
+							<div>
+							  <h4>Raja Bro</h4>
+							  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								Praesentium, temporibus.
+							  </p>
+							</div>
+						  </div>
+						  <div class="cards-inner">
+							<div>
+							  <h4>Raja Bro</h4>
+							  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								Praesentium, temporibus.
+							  </p>
+							</div>
+						  </div>
+						  	                 
 						</div>
 				  
 					  </div>
 					<div class="gridfooter">
-						<h4>Previous | Next</h4>
-						<h5>Show all</h5>
+						<div id="load">
+							<h4 id="showless">Show less</h4>
+							<span style="padding-inline: 5px; font-size: small;">|</span>
+							<h4 id="loadmore">Load more</h4>
+						</div>
+
+						
+						<a id="showall" href="#">Show all</a>
 					</div>
 				</div>
 			</div>
