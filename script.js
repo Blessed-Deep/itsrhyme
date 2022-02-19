@@ -119,43 +119,45 @@ window.addEventListener('DOMContentLoaded',() => {
     const showless = document.getElementById("showless");
     
     let currentItems = 3;
-    loadmore.addEventListener('click', (e) => {
-        
+
+    function countDiv(){
+        const sizediv = document.querySelectorAll('.cards .cards-inner').length;
         const elementList = [...document.querySelectorAll('.cards .cards-inner')];
-        for (let i = currentItems; i < currentItems + 3; i++) {
+        let count=0;
+        for (let i = 3; i <sizediv; i++) {
+            if (elementList[i].style.display == 'block') {
+                count=count+1;
+            }
+        }
+        return count;
+    }
+
+
+
+    loadmore.addEventListener('click', (e) => {
+        let count =countDiv();
+        const sizediv = document.querySelectorAll('.cards .cards-inner').length;
+        if(sizediv-3 == count+3){
+            loadmore.style.color="grey";
+        }
+        const elementList = [...document.querySelectorAll('.cards .cards-inner')];
+        for (let i = currentItems+count; i < currentItems+count + 3; i++) {
             if (elementList[i]) {
                 elementList[i].style.display = 'block';
             }
         }
-        currentItems += 3;
+       
 
-        // Load more button will be hidden after list fully loaded
-        // if (currentItems >= elementList.length) {
-        //     Event.target.style.display = 'none';
-        // }
     })
-    
-    
-    
+    showless.addEventListener('click', (e) => {
+        const count =countDiv();        
+        const elementList = [...document.querySelectorAll('.cards .cards-inner')];
+        if(count>0){
+            for(let i = count+2; i>=count ; i--){            
+                elementList[i].style.display = 'none';    
+            }
+        }        
+    })
 
-    
-   
-    // $('#loadMore').click(function () {
-    //     x= (x+5 <= size_li) ? x+5 : size_li;
-    //     $('#myList li:lt('+x+')').show();
-    //      $('#showLess').show();
-    //     if(x == size_li){
-    //         $('#loadMore').hide();
-    //     }
-    // });
-    // $('#showLess').click(function () {
-    //     x=(x-5<0) ? 3 : x-5;
-    //     $('#myList li').not(':lt('+x+')').hide();
-    //     $('#loadMore').show();
-    //      $('#showLess').show();
-    //     if(x == 3){
-    //         $('#showLess').hide();
-    //     }
-    // });
 
 })

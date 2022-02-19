@@ -526,10 +526,13 @@ div::-webkit-scrollbar{
 }
 .gridfooter #load h4{
     text-decoration: none;
-    color: #001a33;
+    color: black;
     font-size: small;
     font-weight: bold;
     cursor: pointer;
+}
+.gridfooter #load h4:hover{
+    color: #0054a3;
 }
 .gridfooter #showall{
     text-decoration: none;
