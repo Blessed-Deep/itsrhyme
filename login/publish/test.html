@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
+<style>
+    #page {
+        border-radius: 10px;
+    height: 400px;
+    width: 400px;
+    padding: 10px 20px;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    }
+
+    #demo-basic {
+    width: auto;
+    height: 300px;
+    margin-bottom: 50px;
+    }
+    .flip{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left:5%;
+        
+        bottom: 2%;
+    }
+    .flip img{
+        height: 40px;
+        width: 40px;
+        border-radius: 20px;
+        
+        background-color: rgb(248, 241, 231);
+    }
+    .flip img:nth-of-type(2){
+        margin-left: 10px;
+    }
+    .flip img:hover{
+        border-radius: 20px;
+        cursor: pointer;
+        background-color: rgb(233, 228, 220);
+    }
+    .action{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 2%;
+        right: 5%;
+    }
+    .action input{
+        background-color: tomato;
+        padding: 10px;
+        border: none;
+        width: 80px;
+        color: rgba(240, 248, 255, 0.776);
+        border-radius: 20px;
+    }
+    .action input:nth-of-type(1){
+        margin-right: 10px;
+    }
+    .action input:hover{
+        background-color: rgb(0, 160, 67);
+        cursor: pointer;
+    }
+
+</style>
+</head>
+<body>
+    <div id="page">
+        <div id="demo-basic"></div>
+        <div class="flip">
+            <img src="rotate-left-small-svg.svg" id="rleft">
+            <img src="rotate-right-small-svg.svg" id="rright">
+        </div>
+        <div class="action">
+            <input type="button" id="Cancel-result" value="Cancel">
+            <input type="button" id="upload-result" value="Upload">
+        </div>
+    </div>
+      <input type="file" id="upload" value="Choose File">
+      <div id="myimage">
+        Hello
+      </div>
+      <script>
+            $uploadCrop = $('#demo-basic').croppie({
+                    viewport: { width: 300, height: 200 },
+                    boundary: { width: 400, height: 300 },
+                    showZoomer: true,
+                    enableOrientation: true
+                });
+                $('#upload').on('change', function () { 
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $uploadCrop.croppie('bind', {
+                            url: e.target.result
+                        }).then(function(){
+                            console.log('jQuery bind complete');
+                        });
+                        
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                });
+            document.getElementById("rleft").addEventListener('click', function(ev) {
+                    $uploadCrop.croppie('rotate',-90);
+                });
+                document.getElementById("rright").addEventListener('click', function(ev) {
+                    $uploadCrop.croppie('rotate',90);
+                });
+                $('#upload-result').on('click', function (ev) {
+                    $uploadCrop.croppie('result', {
+                        type: 'canvas',
+                        size: 'viewport'
+                    }).then(function (resp) {
+                        html = '<img style="margin: 20px;" src="' + resp + '" />';
+                        $("#myimage").html(html);              
+                    });
+                });
+      </script>
+</body>
+</html>

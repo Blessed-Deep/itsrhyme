@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="send.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
+
+    <title>Send Data</title>
+</head>
+<body>
+        <div class="LoaderICO">
+          <div class="lds-ripple"><div></div><div></div></div>
+        </div>
+        <div class="container">
+
+            <div class="heading">
+              <span id="myname" class="uname">Name</span>
+              <span class="topic">User Field</span>
+              <!-- <span class="button">Logout</span> -->
+              <div  class="button" >
+                <img src="logout.svg"> 
+                <div id="logoutbtn" class="logout">LOGOUT</div>            
+              </div>
+              
+              
+            
+            </div>
+      
+
+            <div class="mainbox">
+                <div class="super_left">
+                  <p style="color: rgba(255, 255, 255, 0.5);">Your Posts</p>
+                  <div class="yourpost" id="yourpost">
+                    <!-- Lists -->
+                    
+                  </div>
+                </div>
+                
+                <div class="left">
+                        <div class="textFields">
+                          <input type="text" class="form-control" name="name" id="author" placeholder="Author Name">
+                          
+                          <input type="text" class="form-control" name="name" id="title" placeholder="Title">
+                          
+                          <textarea name="message" style="height: 300px;" class="form-control" id="content" cols="30" rows="6" placeholder="Content"></textarea>
+                        </div>
+                        
+                        <div class="buttons" style="display:flex;">
+                          <input type="button" id="clear" onclick="ClearFields();" class="sendbtn" value="CLEAR">
+                          <input type="button" id="updatebtn" class="sendbtn" value="UPDATE">
+                          <input type="button" id="sendbtn" class="sendbtn" value="INSERT">
+                        </div>
+                </div>
+                <div class="right">
+                    <div class="center">
+                        <div class="form-input">
+                          <div id="myimage">                        
+                          </div>
+                          <input type="file" id="upload" value="Choose" >
+                          <label for="upload">Upload Image</label>
+                          
+                        </div>
+                      </div> 
+
+                      
+
+                    <div class="modal">
+                      <div id="page" >
+                        <div id="demo-basic"></div>
+                        <div class="flip">
+                            <img src="rotate-left-small-svg.svg" id="rleft">
+                            <img src="rotate-right-small-svg.svg" id="rright">
+                        </div>
+                        <div class="action">
+                            <input type="button" id="Cancel-result" value="Cancel">
+                            <input type="button" id="upload-result" value="Done">
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+                      const modal = document.querySelector(".modal");
+                      const trigger = document.querySelector("#upload");
+                      const closeButton = document.querySelector("#Cancel-result");
+                      
+                      function toggleModal() {
+                          modal.classList.toggle("show-modal");
+                      }              
+                      closeButton.addEventListener("click", toggleModal);
+           
+
+                    </script>
+                      
+                      <script>
+                            $uploadCrop = $('#demo-basic').croppie({
+                                    viewport: { width: 300, height: 200 },
+                                    boundary: { width: 400, height: 300 },
+                                    showZoomer: true,
+                                    enableOrientation: true
+                                });
+                                $('#upload').on('change', function () { 
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                      
+                                        $uploadCrop.croppie('bind', {
+                                            url: e.target.result
+                                        }).then(function(){
+                                            toggleModal();
+                                            console.log('jQuery bind complete');
+                                        });
+                                        
+                                    }
+                                    reader.readAsDataURL(this.files[0]);
+                                                             
+                                });
+                            document.getElementById("rright").addEventListener('click', function(ev) {
+                                    $uploadCrop.croppie('rotate',-90);
+                                });
+                                document.getElementById("rleft").addEventListener('click', function(ev) {
+                                    $uploadCrop.croppie('rotate',90);
+                                });
+                                $('#upload-result').on('click', function (ev) {
+                                    $uploadCrop.croppie('result', {
+                                        type: 'base64',
+                                        size: 'viewport'
+                                    }).then(function (resp) {
+                                        html = '<img id="myimagedata" src="' + resp + '" />';
+                                        $("#myimage").html(html);
+                                                     
+                                    });
+                                    toggleModal();
+                                });
+                               
+                      </script>
+                      
+                </div>
+            </div>
+            
+          </div>
+          
+        
+    
+</body>
+<script type="module">
+    // Firebase Connection //
+      // Import the functions you need from the SDKs you need
+      import { getStorage, ref as sref, uploadString , getDownloadURL } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-storage.js";
+      import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js";
+      import { getDatabase, set, ref,child, get, push, remove, update } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBJuDWwyEVOXy32Mr0sLOILyc3fK9Lh8YE",
+        authDomain: "aamarkabita-f26f1.firebaseapp.com",
+        projectId: "aamarkabita-f26f1",
+        storageBucket: "aamarkabita-f26f1.appspot.com",
+        messagingSenderId: "931707302921",
+        appId: "1:931707302921:web:7414c005675a21100db4d8",
+        measurementId: "G-EW0L9VSE35"
+      };
+    
+      // Initialize Firebase
+      const firebase = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(firebase);
+      const database = getDatabase(firebase);
+      const storage = getStorage(firebase);
+     
+    
+      // Database Activities //
+    
+      // --GET ALL DATA-- //
+      
+      const loginuid = sessionStorage.getItem("LoginUID");
+      
+      const dbRef = ref(getDatabase());
+      
+      
+
+        get(child(dbRef, `aamarkabita/${loginuid}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            snapshot.forEach(function(childSnapshot)
+            {
+          
+                  const key = childSnapshot.key;
+                  const data = childSnapshot.val();
+                  if(!(childSnapshot.key=="username")){
+                          AddItemsToList(data['title'],key);
+                  }
+                  else{
+                    document.getElementById("myname").innerHTML= data;
+                  }
+          
+                
+            })
+        } else {
+            console.log("No data available");
+        }
+        }).catch((error) => {
+        console.error(error);
+        });
+        function AddItemsToList(title,key){
+            var deletekey = key+" delete";
+            const container = document.getElementById('yourpost');
+            const crd =`<div class="listitem">
+                          <div class="placeholder-item" id="${key}"><span>${title}</span></div>
+                          <div class="deleteBtn" id="${deletekey}"><span>x</span></div>
+                        </div>`;
+            // Append card element to the container
+            container.innerHTML = crd + container.innerHTML;
+        }
+
+
+
+//------------------------SHOW or DELETE-----by clicking item ----------------------------//
+
+        window.addEventListener('click', (event) => {
+                  get(child(dbRef, `aamarkabita/${loginuid}`)).then((snapshot) => {
+                  if (snapshot.exists()) {
+                      snapshot.forEach(function(childSnapshot)
+                      {
+                          const key = childSnapshot.key;
+                          const data = childSnapshot.val();
+                          if(event.target.id ==key){
+                            if(!(key=="username")){
+                              document.getElementById("author").value = data['author'];
+                              document.getElementById("title").value = data['title'];
+                              document.getElementById("content").value = data['content'];
+                              document.getElementById("myimage").innerHTML = '<img id="myimagedata" src="'+ data['imageUrl'] +'" />'
+                              sessionStorage.setItem("ItemID",key);
+                              sessionStorage.setItem("Date",data['date']);
+                            }
+                          }
+                          if(event.target.id == key+" delete"){
+                            if(confirm("Are you sure to delete "+data['title']+" ?")){
+                              remove(child(dbRef, `aamarkabita/${loginuid}/${key}`));
+                              alert("Delete Successful");
+                              location.reload();
+                              
+                            }
+                          }
+                          
+                      })
+                  } else {
+                      console.log("No data available");
+                  }
+                  }).catch((error) => {
+                  console.error(error);
+                  });
+          });
+          // Show by clicking item but problem if click other item
+          // window.addEventListener('click', (event) => {
+          //     get(child(dbRef, `aamarkabita/${loginuid}/${event.target.id}`)).then((childSnapshot) => {
+          //         if(!(childSnapshot.key=="username")){
+          //               const data = childSnapshot.val();
+          //               document.getElementById("author").value = data['author'];
+          //               document.getElementById("title").value = data['title'];
+          //               document.getElementById("content").value = data['content'];
+          //         }
+          //     }).catch((error) => {
+          //     console.error(error);
+          //     });
+          //   });
+
+///////-------------------INSERT-------------------------------------/////////////////////
+
+    document.getElementById('sendbtn').addEventListener("click", function() {
+                    var author = document.getElementById("author").value;
+                    var title = document.getElementById("title").value;
+                    var content = document.getElementById("content").value;
+                    var imageNode = document.getElementById("myimage");
+    
+                    
+                if(author !="" && title!="" && content!=""){
+                  if((imageNode.childNodes.length > 0)){
+                      let conf = confirm("Are you sure to insert your post ?");
+                      var date = new Date();
+                      date = date.toISOString();
+                      if (conf){
+                        showLoader();
+                        const file = document.getElementById("myimagedata").src;
+                        const mysref = sref(storage,'AamarKabita_Images/'+"AamarKabita-"+date+".jpg");
+                        uploadString(mysref, file,'data_url').then((snapshot) => {
+                          
+                          console.log('Successfully Uploaded a data_url!');                          
+                          getDownloadURL(mysref).then((url) => {
+                                set(push(ref(database,'aamarkabita/'+loginuid)),{
+                                  author : author , 
+                                  title  : title  ,
+                                  content: content,
+                                  date : date,
+                                  imageUrl: url 
+                                }).then(() => {
+                                  
+                                  sessionStorage.removeItem("Date");
+                                  sessionStorage.removeItem("ItemID");
+                                  location.reload();
+                              })
+                          }).catch((error) => {
+                              console.log(error);
+                          })
+                        });
+                        
+                      }
+                      } else {
+                        alert("Please Upload an Image");
+                      } 
+                } else {
+                  alert("Please fill all the blanks")
+                }            
+    });
+
+// ------------------------ UDATE -----------------------------------------------------------//
+
+    document.getElementById('updatebtn').addEventListener("click", function() {
+                    var author = document.getElementById("author").value;
+                    var title = document.getElementById("title").value;
+                    var content = document.getElementById("content").value;
+
+                if(author !="" && title!="" && content!=""){
+                  if((imageNode.childNodes.length > 0)){
+                    let conf = confirm("Are you sure to update this post ?");                  
+                    if (conf){
+                          showLoader();
+                          const file = document.getElementById("myimagedata").src;
+                          const mysref = sref(storage,'AamarKabita_Images/'+"AamarKabita-"+sessionStorage.getItem("Date")+".jpg");
+                          uploadString(mysref, file,'data_url').then((snapshot) => {
+                            
+                            console.log('Successfully Uploaded a data_url!');                          
+                            getDownloadURL(mysref).then((url) => {
+                                  update(ref(database,'aamarkabita/'+loginuid+'/'+sessionStorage.getItem("ItemID")),{
+                                    author : author , 
+                                    title  : title  ,
+                                    content: content,
+                                    imageUrl: url
+                                  }).then(() => {
+                                    sessionStorage.removeItem("Date");  
+                                      sessionStorage.removeItem("ItemID");
+                                        location.reload();
+                                  });                            
+                            }).catch((error) => {
+                                console.log(error);
+                            })
+                          });                    
+                    } 
+                  } else {
+                    alert("Please upload an image");
+                }
+                } else {
+                  alert("Please fill all the blanks")
+                }            
+    });
+
+    document.getElementById("logoutbtn").addEventListener('click',function(){
+      // const auth = getAuth();
+      // signOut(auth).then(() => {
+      //   alert("Sign out Successful");
+      // }).catch((error) => {
+      //   // An error happened.
+      //   alert(error.message);
+      // });
+      sessionStorage.removeItem("LoginUID");
+      window.opener = self;
+      window.close();
+    })
+    
+    const showL = document.querySelector(".LoaderICO");
+    function showLoader() {
+        showL.classList.toggle("show-loader");
+    }
+
+   
+</script>
+<script>
+  function ClearFields() {
+    document.getElementById("author").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("content").value = "";
+    const imageNode = document.getElementById("myimage");
+    if(imageNode.hasChildNodes()){
+      imageNode.removeChild(imageNode.firstChild);
+    }
+  }
+  const imageNode = document.getElementById("myimage");
+    if(imageNode.hasChildNodes()){
+      imageNode.removeChild(imageNode.firstChild);
+    }
+</script>
+</html>
