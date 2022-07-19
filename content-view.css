@@ -22,43 +22,55 @@ body{
     position: relative;
 }
 .container .viewcolumn .title{
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 200px;
     background: #e8e8e8;
     position: absolute;
     top: 0%;
     border-radius: 5px;
-    display: flex;
-    align-items: center;
 }
 .container .viewcolumn .title .pic{
     margin: 10px;
     background-color: #d7d7d7;
     height: 140px;
-    width: 220px;
-    margin-left: 80px;
+    width: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5%;
     border-radius: 5px;
 }
 .pic img{
     height: 100%;
     width: 100%;
     border-radius: 5px;
+
 }
-.container .viewcolumn .title .ctitle .maintitle span{
-    
+.container .viewcolumn .title .ctitle .maintitle #title{
     color: #13111a;
-    font-weight: bold;
-    font-size: 40px;
+    font-size: 25px;
     
 }
-.container .viewcolumn .title .ctitle .author span{
+.maintitle{
+    white-space: nowrap;    
+    overflow-x: auto;
+    
+    scroll-behavior: smooth;
+}
+.ctitle{
+    padding: 0px 20px;
+    width: 77%;
+    display: flex;
+    flex-direction: column;
+}
+.container .viewcolumn .title .ctitle .maintitle #author{
     color: #5d5d5d;
     font-weight: bold;
     font-size: 15px;
 }
-.container .viewcolumn .title .ctitle{
-    padding-left: 30px;
-}
+
 
 .container .viewcolumn .content p{
     margin: 80px;
@@ -146,11 +158,11 @@ body{
 .container .recentlink{
     width: 14%;
     background: #e8e8e8;
-    padding: 20px;
     height: auto;
     border-radius: 5px;
 }
 .container .recentlink div{
+    margin: 0px 15px;
     scrollbar-width: none;
     overflow-y: auto;
     scroll-behavior: smooth;
@@ -206,5 +218,73 @@ div::-webkit-scrollbar{
     }
     to   {
         left: 100%;
+    }
+}
+@media screen and (max-width: 1200px){
+    #mypic{
+        width: 35%;
+        margin-left: 5%;
+    }
+    .ctitle{
+        width: 60%;
+        padding: 0px 10px;
+    }
+    .container .viewcolumn{
+        width: 65%;
+    }
+    .container .recentlink{
+        width: 20%;
+    }
+    
+}
+@media screen and (max-width: 800px){
+    .container .viewcolumn .content p {
+        margin: 40px;
+        font-size: 18px;
+    }
+    .container .viewcolumn .title .ctitle .maintitle #title{
+        font-size: 20px;
+    }
+    .container .viewcolumn .title{
+        font-size: 15px;
+    } 
+    .container .viewcolumn{
+        margin-right: 0px;
+        width: 96%;
+    }
+    .container .recentlink{
+        width: 96%;
+        margin-top: 10px;
+    }
+    .container{
+        padding-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    #mypic{
+        width: 35%;
+        margin-left: 5%;
+    }
+    .ctitle{
+        width: 60%;
+        padding: 0px 10px;
+    }
+    
+}
+@media screen and (max-width: 500px){
+    #mypic{
+        width: 45%;
+        margin-left: 5%;
+    }
+    .container .viewcolumn .content p {
+        margin: 30px;
+        font-size: 15px;
+    }
+    
+    .ctitle{
+        width: 50%;
+        padding: 0px 10px;
     }
 }
