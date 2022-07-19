@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Content View Aamarkkabita</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <link rel="stylesheet" href="content-view.css">
+</head>
+<body>
+    <div class="container">
+        <div class="viewcolumn">
+            <div class="contentview">
+                <div class="title">
+                    <div class="pic" id="mypic">
+                         
+                    </div>
+                    <div  class="ctitle">
+                        <div class="maintitle"> <span  id="title"></span> </div>
+                        <div class="author"> <span id="author"></span></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <p id="content">
+                </div>
+                <div style="display: none;" class="likebtn">
+                    <span class="like">Like</span>
+                    <span class="total">0</span>
+                </div>
+                <div class="prenext">
+                    <button id="previous" class="previous">Previous</button>
+                    <button id="next" class="next">Next</button>
+                </div>
+            </div>
+        </div>
+        <div class="recentlink">
+            <p style="font-weight: bolder;">New Releases</p>
+            <div id="recentLinks">
+                
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module">  
+        // Firebase Connection //
+  // Import the functions you need from the SDKs you need
+  import { getDatabase, set, ref,child, get } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBJuDWwyEVOXy32Mr0sLOILyc3fK9Lh8YE",
+    authDomain: "aamarkabita-f26f1.firebaseapp.com",
+    projectId: "aamarkabita-f26f1",
+    storageBucket: "aamarkabita-f26f1.appspot.com",
+    messagingSenderId: "931707302921",
+    appId: "1:931707302921:web:7414c005675a21100db4d8",
+    measurementId: "G-EW0L9VSE35"
+  };
+
+  // Initialize Firebase
+  const firebase = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(firebase);
+  const database = getDatabase(firebase);
+
+  // Database Activities //
+
+// --GET ALL DATA-- //
+
+        var sortedUID = [];
+        var snaps;
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `aamarkabita`)).then((snapshot) => {
+        if (snapshot.exists()) {
+            let arr = [];
+            snapshot.forEach(function(childSnapshot)
+            {
+                if (childSnapshot.exists()){
+                    childSnapshot.forEach(function(childSnapshot)
+                    {
+                        const key = childSnapshot.key;
+                        const data = childSnapshot.val();
+
+                        if ( sessionStorage.getItem("GridID") == key){
+                            AddItemsToPage(data['title'],data['author'],data['content']);
+                            AddItemImages(data['imageUrl']);
+                        }
+                        if(!(childSnapshot.key=="username")){
+
+                            arr.push({id:key, date:data['date']});
+                            
+                        }
+                    })
+                } else {
+                    console.log("No data available");
+                }
+                
+            })
+            //Sort the date
+            arr.sort(function(a, b) {
+                return (a.date < b.date) ? -1 : ((a.date > b.date) ? 1 : 0);
+            });
+            sortedUID = arr;
+            
+            snaps = snapshot;
+            // New Releases Data -- problem#1 
+            arr.forEach(function(sortedid){
+                snapshot.forEach(function(childSnapshot)
+                {
+                    childSnapshot.forEach(function(childSnapshot)
+                    {
+                        const key = childSnapshot.key;
+                        if(sortedid['id']==key){
+                            const data = childSnapshot.val();
+                            if(!(childSnapshot.key=="username")){
+                                AddItemsToList(data['title'],key);
+                            }
+                        }
+                    })           
+                })                
+            })
+
+        } else {
+            console.log("No user available");
+        }
+        }).catch((error) => {
+        console.error(error);
+        });
+// ----------------Add Images ---------------------//
+        function AddItemImages(imgUrl){
+            const imagecontainer = document.getElementById('mypic');            
+            imagecontainer.innerHTML = `<img id="mysrcpic" src="${imgUrl}" >`;
+        }
+// -------------Add Data ---------------------------//
+        function AddItemsToList(title, key){
+            const container = document.getElementById("recentLinks");
+            const crd =`<div id="${key}" class="placeholder-item">${title}</div>`;
+            // Append card element to the container
+            container.innerHTML = crd + container.innerHTML;
+        }
+    
+        function AddItemsToPage(title,author,content){
+            // var i = document.getElementById("mysrcpic");
+
+            var t = document.getElementById("title");
+            var a = document.getElementById("author");
+            var c = document.getElementById("content");
+            // i.src=imageUrl;
+            t.innerHTML = title;
+            a.innerHTML=author;
+            c.innerHTML = content;
+
+        }
+
+        //Display by click recent link
+        window.addEventListener('click', (event) => {
+          get(child(dbRef, `aamarkabita`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                snapshot.forEach(function(childSnapshot)
+                {
+                    childSnapshot.forEach(function(childSnapshot)
+                    {
+                        if(event.target.id ==childSnapshot.key){
+                            const key = childSnapshot.key;
+                            const data = childSnapshot.val();
+                            if(!(childSnapshot.key=="username")){
+                                AddItemsToPage(data['title'],data['author'],data['content']);  
+                                AddItemImages(data['imageUrl']); 
+                            }
+                        }
+                    })
+                })
+            } else {
+                console.log("No data available");
+            }
+            }).catch((error) => {
+            console.error(error);
+            });
+        });
+        // const next = document.getElementById("next");
+        // next.addEventListener('click', function(){
+        //     var nextid = sessionStorage.getItem("GridID");
+        //     console.log(nextid);
+        //     for(var i = 0; i< sortedUID.length; i++){
+        //         var newindex = i+1;
+        //         if(newindex == sortedUID.length){
+        //             nextid = sortedUID[i]['id'];
+        //             console.log(nextid);
+        //             sessionStorage.setItem("GridID",nextid);
+        //         } 
+        //         if(nextid==sortedUID[i]['id']){
+        //             nextid = sortedUID[i]['id'];
+        //             sessionStorage.setItem("GridID",nextid);
+        //         }
+        //     }
+        //     snaps.forEach(function(childSnapshot)
+        //     {
+        //         if (childSnapshot.exists()){
+        //             childSnapshot.forEach(function(childSnapshot)
+        //             {
+        //                 const key = childSnapshot.key;
+        //                 const data = childSnapshot.val();
+
+        //                 if (!(key=="username") && (nextid == key)){
+        //                     AddItemsToPage(data['title'],data['author'],data['content']);
+        //                 }
+        //             })
+        //         } else {
+        //             console.log("No data available");
+        //         }
+                
+        //     })
+        // })
+</script>
+
+</html>

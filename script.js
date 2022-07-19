@@ -115,16 +115,23 @@ window.addEventListener('DOMContentLoaded',() => {
 
 
     // Load More Show Less
+    const elementList = [...document.querySelectorAll('.cards .cards-inner')];
+        for (let i = 0; i < 12; i++) {
+            if (elementList[i]) {
+                elementList[i].style.display = 'block';
+            }
+        }
+    
     const loadmore = document.getElementById("loadmore");
     const showless = document.getElementById("showless");
     
-    let currentItems = 3;
+    let currentItems = 12;
 
     function countDiv(){
         const sizediv = document.querySelectorAll('.cards .cards-inner').length;
         const elementList = [...document.querySelectorAll('.cards .cards-inner')];
         let count=0;
-        for (let i = 3; i <sizediv; i++) {
+        for (let i = currentItems; i <sizediv; i++) {
             if (elementList[i].style.display == 'block') {
                 count=count+1;
             }
@@ -132,32 +139,37 @@ window.addEventListener('DOMContentLoaded',() => {
         return count;
     }
 
+    
+        
 
 
     loadmore.addEventListener('click', (e) => {
         let count =countDiv();
-        const sizediv = document.querySelectorAll('.cards .cards-inner').length;
-        if(sizediv-3 == count+3){
-            loadmore.style.color="grey";
-        }
         const elementList = [...document.querySelectorAll('.cards .cards-inner')];
-        for (let i = currentItems+count; i < currentItems+count + 3; i++) {
+        for (let i = currentItems+count; i < currentItems+count + currentItems; i++) {
             if (elementList[i]) {
                 elementList[i].style.display = 'block';
             }
         }
-       
+        var gridscroll = document.getElementById("gridlistcontainer");
+        gridscroll.scrollTop = gridscroll.scrollHeight;
 
     })
     showless.addEventListener('click', (e) => {
         const count =countDiv();        
         const elementList = [...document.querySelectorAll('.cards .cards-inner')];
+        const sizediv = document.querySelectorAll('.cards .cards-inner').length;
+
         if(count>0){
-            for(let i = count+2; i>=count ; i--){            
+            for(let i = sizediv-1; i>=sizediv-count ; i--){            
                 elementList[i].style.display = 'none';    
             }
         }        
-    })
+    })  
+
 
 
 })
+
+
+ 
