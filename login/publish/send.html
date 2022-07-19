@@ -19,7 +19,7 @@
         <div class="container">
 
             <div class="heading">
-              <span id="myname" class="uname">Name</span>
+              <span id="myname" class="uname">Username</span>
               <span class="topic">User Field</span>
               <!-- <span class="button">Logout</span> -->
               <div  class="button" >
@@ -211,8 +211,8 @@
             var deletekey = key+" delete";
             const container = document.getElementById('yourpost');
             const crd =`<div class="listitem">
-                          <div class="placeholder-item" id="${key}"><span>${title}</span></div>
-                          <div class="deleteBtn" id="${deletekey}"><span>x</span></div>
+                          <div class="placeholder-item" id="${key}"><span id="${key}">${title}</span></div>
+                          <div class="deleteBtn" id="${deletekey}"><span id="${key}">x</span></div>
                         </div>`;
             // Append card element to the container
             container.innerHTML = crd + container.innerHTML;
